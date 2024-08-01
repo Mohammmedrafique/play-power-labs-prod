@@ -62,7 +62,7 @@ const TopSection = ({
 
   return (
     <>
-      <h1 style={{ margin: "3vh 0", color: "gray" }}>Time Converter</h1>
+      {/* <h1 style={{ margin: "3vh 0", color: "gray" }}></h1> */}
       <div className="upper-row" id={isDark ? "dark-upper-row" : ""}>
         <Select
           className="basic-single"

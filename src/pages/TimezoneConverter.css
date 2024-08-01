@@ -10,7 +10,7 @@
 }
 
 .upper-row {
-  background: rgba(196, 194, 194, 0.338);
+  background:#F5F5F5;
   position: relative;
   height: 10vh;
   padding-inline: 5vw;
@@ -82,9 +82,9 @@
   place-items: center;
   height: 100%;
   width: 5vw;
-  background: rgba(128, 128, 128, 0.338);
+  background: rgba(255, 255, 255, 0.338);
   font-size: 1.3rem;
-  color: rgb(37, 156, 174);
+  color: #06BCEE;
 }
 
 .filter-container {
@@ -167,10 +167,10 @@
 .time-track {
   background: linear-gradient(
     to right,
-    #4b698c 0%,
+    #577faf 0%,
     #ccf1f0 30%,
     #ccf1f0 60%,
-    #4b698c 100%
+    #577faf 100%
   );
   height: 3.5vh;
   border-radius: 0.5vh;
@@ -179,17 +179,17 @@
 .dark-time-track {
   background: linear-gradient(
     to right,
-    #4b698c 0%,
-    #c0ad6a 30%,
-    #c0ad6a 60%,
-    #4b698c 100%
+    #5780b0 0%,
+    #f9e7a6 30%,
+    #f9e7a6 60%,
+    #5780b0 100%
   );
 }
 
 .time-mark {
   background-color: rgb(113, 110, 110);
   font-size: 10px;
-  height: 10px;
+  height: 20px;
   width: 2px;
 }
 
