@@ -1,7 +1,10 @@
 :root {
   font-family: outfit;
+ 
 }
-
+.select__control {
+  width: max-content;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -61,7 +61,7 @@ const TopSection = ({
   };
 
   return (
-    <>
+    <div className="top-section">
       {/* <h1 style={{ margin: "3vh 0", color: "gray" }}></h1> */}
       <div className="upper-row" id={isDark ? "dark-upper-row" : ""}>
         <Select
@@ -163,7 +163,7 @@ const TopSection = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

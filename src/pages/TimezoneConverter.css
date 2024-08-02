@@ -10,7 +10,7 @@
 }
 
 .upper-row {
-  background:#F5F5F5;
+  background: #f5f5f5;
   position: relative;
   height: 10vh;
   padding-inline: 5vw;
@@ -84,7 +84,7 @@
   width: 5vw;
   background: rgba(255, 255, 255, 0.338);
   font-size: 1.3rem;
-  color: #06BCEE;
+  color: #06bcee;
 }
 
 .filter-container {
