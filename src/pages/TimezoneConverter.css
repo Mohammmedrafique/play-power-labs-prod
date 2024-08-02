@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: space-between;
   column-gap: 5vw;
+  gap: 25px;
   margin: 0.1vh 1vw;
 }
 
@@ -317,7 +318,7 @@
   }
 
   .calendar-box {
-    width: 15vw;
+    width: 20vw;
   }
 
   .date-picker {
