@@ -1,16 +1,16 @@
 import moment from "moment-timezone";
 
-export const generateInitialTimes = () => ({
+export const InitialTimes = () => ({
   "Asia/Kolkata": moment().tz("Asia/Kolkata").format("HH:mm"),
   UTC: moment().tz("UTC").format("HH:mm"),
 });
 
-export const generateInitialTimezones = () => ({
+export const InitialTimezones = () => ({
   "Asia/Kolkata": "Asia/Kolkata",
   UTC: "UTC",
 });
 
-export const generateSliderMarks = () => {
+export const SliderMarks = () => {
   const marks = [];
   const numMarks = 25;
   const markSpacing = 1440 / (numMarks - 1);
@@ -21,7 +21,7 @@ export const generateSliderMarks = () => {
   return marks;
 };
 
-export const generateTimeOptions = () => {
+export const TimeOptions = () => {
   const options = [];
   for (let i = 0; i < 96; i++) {
     const hour = Math.floor(i / 4);
@@ -39,9 +39,9 @@ export const generateTimeOptions = () => {
   return options;
 };
 
-export const getTimezoneAbbr = (zone) => moment.tz(zone).format("z");
+export const TimezoneAbbr = (zone) => moment.tz(zone).format("z");
 
-export const getTimezoneOffset = (zone) => {
+export const TimezoneOffset = (zone) => {
   const offset = moment.tz(zone).format("Z");
   return `GMT ${offset}`;
 };

@@ -53,7 +53,7 @@ const TopSection = ({
     const endTime = moment
       .tz(selectedDate.toISOString(), timezones[Object.keys(selectedTimes)[0]])
       .add(1, "hour")
-      .format("YYYYMMDDTHHmmssZ"); // Assuming a 1-hour duration
+      .format("YYYYMMDDTHHmmssZ");
 
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Event&dates=${startTime}/${endTime}`;
 
@@ -61,11 +61,14 @@ const TopSection = ({
   };
 
   return (
-    <div className="top-section">
-      {/* <h1 style={{ margin: "3vh 0", color: "gray" }}></h1> */}
-      <div className="upper-row" id={isDark ? "dark-upper-row" : ""}>
+    <div className="lg:px-12 px-4 ">
+      <div
+        className={`flex flex-col md:flex-row items-center justify-between p-4 md:p-5 gap-6 m-[0.1vh_1vw] ${
+          isDark ? "bg-[#2c2f34]" : "bg-[#f5f5f5]"
+        }`}
+      >
         <Select
-          className="basic-single"
+          className="basic-single w-auto md:w-[30vw]"
           classNamePrefix="select"
           placeholder={"Add Time Zone, City or Town"}
           isSearchable={true}
@@ -75,88 +78,97 @@ const TopSection = ({
           styles={{
             container: (prev) => ({
               ...prev,
-              width: "30vw",
               height: "5vh",
             }),
             valueContainer: (prev) => ({
               ...prev,
-              width: "30vw",
               height: "6vh",
               borderRadius: "0.5vh 0 0 0.5vh",
-              backgroundColor: isDark ? "#2c2f34ef" : "white",
+              backgroundColor: isDark ? "#e6e9ecee" : "white",
             }),
             indicatorsContainer: (prev) => ({
               ...prev,
               borderRadius: "0 0.5vh 0.5vh 0",
-              backgroundColor: isDark ? "#2c2f34ef" : "white",
+              backgroundColor: isDark ? "#acb1baee" : "white",
             }),
           }}
         />
-        <div className="date-container">
+        <div className="relative flex items-center  w-full md:w-[20vw] h-[6vh] bg-white border border-gray-300 rounded-lg shadow-inner">
           <DatePicker
-            className={isDark ? "date-picker dark-date-picker" : "date-picker"}
+            className={`text-lg border-none outline-none h-[5vh] w-full md:w-[15vw] rounded-l-lg ${
+              isDark ? "bg-[#2c2f34ef] text-white" : ""
+            }`}
             id="date-picker"
             selected={selectedDate}
             onChange={handleDateChange}
             dateFormat="MMMM d, yyyy"
           />
           <label
-            className="calendar-box"
+            className={`absolute right-0 flex items-center justify-center h-full w-[5vw] border-l border-gray-300 rounded-r-lg text-xl text-[#06bcee] ${
+              isDark ? "bg-[#2c2f34ef]" : "bg-[rgba(255,255,255,0.338)]"
+            }`}
             htmlFor="date-picker"
-            style={
-              isDark
-                ? { backgroundColor: "#2c2f34ef", borderRadius: "0 1vh 1vh 0" }
-                : {}
-            }
           >
             <CalendarDays />
           </label>
         </div>
 
-        <div className="filter-container">
-          <div onClick={handleGoogleCalendarClick}>
+        <div className="flex items-center w-full md:w-[25vw] h-[6vh] border border-gray-300 rounded-lg text-xl text-[rgb(37,156,174)]">
+          <div
+            onClick={handleGoogleCalendarClick}
+            className="flex-1 h-full flex items-center justify-center border-r border-gray-300 hover:bg-[rgba(61,194,214,0.731)] hover:text-[rgb(206,204,204)] transition-all duration-500 cursor-pointer"
+          >
             <CalendarClock />
           </div>
-          <div onClick={reverseTimezones}>
+          <div
+            onClick={reverseTimezones}
+            className="flex-1 h-full flex items-center justify-center border-r border-gray-300 hover:bg-[rgba(61,194,214,0.731)] hover:text-[rgb(206,204,204)] transition-all duration-500 cursor-pointer"
+          >
             <ArrowDownUp />
           </div>
-          <div onClick={() => setIsSharing(!isSharing)}>
+          <div
+            onClick={() => setIsSharing(!isSharing)}
+            className="flex-1 h-full flex items-center justify-center border-r border-gray-300 hover:bg-[rgba(61,194,214,0.731)] hover:text-[rgb(206,204,204)] transition-all duration-500 cursor-pointer"
+          >
             <Link2 />
           </div>
-          <div onClick={() => setIsDark((prev) => !prev)}>
+          <div
+            onClick={() => setIsDark((prev) => !prev)}
+            className="flex-1 h-full flex items-center justify-center hover:bg-[rgba(61,194,214,0.731)] hover:text-[rgb(206,204,204)] transition-all duration-500 cursor-pointer"
+          >
             {isDark ? <Sun /> : <Moon />}
           </div>
         </div>
       </div>
 
       {isSharing && (
-        <div className="link-row" id={isDark ? "dark-link-row" : ""}>
+        <div
+          className={`p-6 m-[0.1vh_1vw] ${
+            isDark ? "bg-[#2c2f34]" : "bg-[rgba(196,194,194,0.338)]"
+          }`}
+        >
           <input
-            className="link-input"
+            className="w-full h-[6vh] rounded-lg outline-none border border-gray-300 shadow-inner px-4 text-left mb-4 text-base text-gray-500"
             type="text"
             value={generateLink()}
             readOnly
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ display: "flex" }}>
+          <div className="flex justify-around items-center">
+            <span className="flex items-center">
               <input
                 type="checkbox"
                 checked={includeTime}
                 onChange={() => setIncludeTime(!includeTime)}
+                className="mr-2"
               />
               <label>Include Time</label>
             </span>
-            <span style={{ display: "flex" }}>
+            <span className="flex items-center">
               <input
                 type="checkbox"
                 checked={includeDate}
                 onChange={() => setIncludeDate(!includeDate)}
+                className="mr-2"
               />
               <label>Include Date</label>
             </span>
