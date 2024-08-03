@@ -6,10 +6,10 @@ import { GripVertical } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
-  generateSliderMarks,
-  generateTimeOptions,
-  getTimezoneAbbr,
-  getTimezoneOffset,
+  SliderMarks,
+  TimeOptions,
+  TimezoneAbbr,
+  TimezoneOffset,
 } from "./utils";
 
 const TimezoneCard = ({
@@ -63,31 +63,36 @@ const TimezoneCard = ({
   };
 
   const labels = ["12AM", "3AM", "6AM", "9AM", "12PM", "3PM", "6PM", "9PM"];
-  const timeOptions = generateTimeOptions();
+  const timeOptions = TimeOptions();
 
   return (
     <div
-      className={"zone-container"}
-      id={isDark && "dark-zone-container"}
+      className={`relative border border-[rgb(147,147,147)] h-[25vh] mb-4 px-2 ${
+        isDark ? "bg-[#2c2f34]" : ""
+      }`}
       ref={setNodeRef}
       style={style}
     >
-      <div className="zone-upper-row">
-        <div className="drag-button" {...listeners} {...attributes}>
+      <div className="h-[55%] flex items-center gap-4">
+        <div
+          className="cursor-grab select-none flex flex-col text-[rgb(161,155,155)]"
+          {...listeners}
+          {...attributes}
+        >
           <GripVertical size={18} />
           <GripVertical size={18} />
           <GripVertical size={18} />
           <GripVertical size={18} />
         </div>
-        <div className="zone-left-box">
-          <h1 style={isDark ? { color: "white" } : {}}>
-            {getTimezoneAbbr(timezones[zone])}
+        <div className="text-gray-500 w-[60%] h-[80%] flex flex-col items-start justify-between">
+          <h1 className={isDark ? "text-white" : "text-[rgb(63,63,63)]"}>
+            {TimezoneAbbr(timezones[zone])}
           </h1>
           <p>{zone.replace(/-/g, "/")}</p>
         </div>
-        <div className="zone-right-box">
+        <div className="flex flex-col h-[80%]">
           <Select
-            className={"time-picker"}
+            className="time-picker"
             classNamePrefix="select"
             placeholder={formatDisplayTime(zone, localTime)}
             value={timeOptions.find(
@@ -115,25 +120,32 @@ const TimezoneCard = ({
                 fontWeight: "bold",
                 borderRadius: "0.5vh",
                 color: isDark ? "white" : "black",
-                backgroundColor: isDark ? "#2c2f34ef" : "white",
+                backgroundColor: isDark ? "#d4d4d5ee" : "white",
               }),
             }}
           />
-          <span>
-            <span>{getTimezoneOffset(zone)}</span>
+          <span className="flex justify-between text-[rgba(158,147,147,0.805)]">
+            <span>{TimezoneOffset(zone)}</span>
             <span>{formatDisplayDate(zone, localTime)}</span>
           </span>
         </div>
-        <button className="remove" onClick={() => removeTimezone(zone)}>
+        <button
+          className="absolute right-4 top-2 text-2xl text-[rgb(173,169,169)] bg-transparent outline-none border-none cursor-pointer"
+          onClick={() => removeTimezone(zone)}
+        >
           x
         </button>
       </div>
       <Slider
-        className="time-slider"
-        thumbClassName="time-thumb"
-        trackClassName={isDark ? "time-track dark-time-track" : "time-track"}
-        markClassName="time-mark"
-        marks={generateSliderMarks()}
+        className="time-slider w-full lg:h-[60px] flex items-center h-[80px] "
+        thumbClassName="time-thumb border border-[rgb(104,104,104)] text-[rgb(158,157,157)] rounded-sm bg-[#f7f4f4] h-[30px] w-[35px] cursor-grab outline-none"
+        trackClassName={`time-track h-[3.5vh] rounded-[0.5vh] ${
+          isDark
+            ? "bg-gradient-to-r from-[#5780b0] via-[#f9e7a6] to-[#5780b0]"
+            : "bg-gradient-to-r from-[#577faf] via-[#ccf1f0] to-[#577faf]"
+        }`}
+        markClassName="time-mark bg-[rgb(113,110,110)] text-xs h-[20px] w-[2px]"
+        marks={SliderMarks()}
         min={0}
         max={1440}
         step={15}
@@ -144,8 +156,8 @@ const TimezoneCard = ({
         renderMark={(props) => <span {...props} />}
       />
       {labels && (
-        <div className="labels">
-          {generateSliderMarks()
+        <div className="labels w-full h-[2vh] mt-[-2vh] text-[2vh] flex items-center justify-between text-gray-500">
+          {SliderMarks()
             .filter((mark, index) => mark % 180 === 0)
             .map((mark, index) => (
               <div key={mark}>{labels[index]}</div>

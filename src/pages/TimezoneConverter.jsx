@@ -8,14 +8,13 @@ import {
 } from "@dnd-kit/sortable";
 import TopSection from "./TopSection";
 import TimezoneCard from "./TimezoneCard";
-import { generateInitialTimes, generateInitialTimezones } from "./utils";
-import "./TimezoneConverter.css";
+import { InitialTimes, InitialTimezones } from "./utils";
 
 const TimezoneConverter = () => {
-  const [selectedTimes, setSelectedTimes] = useState(generateInitialTimes());
+  const [selectedTimes, setSelectedTimes] = useState(InitialTimes());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [reverseOrder, setReverseOrder] = useState(false);
-  const [timezones, setTimezones] = useState(generateInitialTimezones());
+  const [timezones, setTimezones] = useState(InitialTimezones());
   const [isDark, setIsDark] = useState(
     () => JSON.parse(localStorage.getItem("isDark")) || false
   );
@@ -117,7 +116,11 @@ const TimezoneConverter = () => {
   }
 
   return (
-    <div className="main-container" id={isDark && "dark-main-container"}>
+    <div
+      className={`flex flex-col justify-center min-h-screen ${
+        isDark ? "bg-[#131416]" : ""
+      }`}
+    >
       <TopSection
         allTimezones={allTimezones}
         addNewTimezone={addNewTimezone}
@@ -133,7 +136,7 @@ const TimezoneConverter = () => {
       />
 
       <DndContext collisionDetection={closestCorners} onDragEnd={onDragEnd}>
-        <div className="time-converter">
+        <div className="px-[5vw] py-[1vh]">
           <SortableContext
             items={timezoneEntries.map(([zone]) => zone)}
             strategy={verticalListSortingStrategy}
